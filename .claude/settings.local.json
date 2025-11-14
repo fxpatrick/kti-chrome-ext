@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(if exist build rmdir /s /q build)",
+      "Bash(if exist dist rmdir /s /q dist)",
+      "Bash(if exist chrome rmdir /s /q chrome)",
+      "Bash(npx webpack:*)",
+      "Bash(npx sass:*)",
+      "Bash(xcopy:*)",
+      "Bash(mkdir:*)",
+      "Bash(nul)",
+      "Bash(copy sass\\DroidSansMono.woff2 css\\ )",
+      "Bash(copy sass\\mocha.css css\\)",
+      "Bash(robocopy:*)",
+      "Bash(copy LICENSE chrome\\ )",
+      "Bash(copy manifests\\manifest-chrome.json chrome\\manifest.json)",
+      "Bash(copy:*)",
+      "Bash(copy manifests\\manifest-pwa.json chrome\\manifest-pwa.json)",
+      "Bash(cp:*)",
+      "Bash(git config:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

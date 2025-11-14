@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
 @import "ui";
 
 // Structure
@@ -17,7 +18,7 @@ body {
   height: 480px;
   transform-origin: left top;
   overflow: hidden;
-  font-family: arial, "Microsoft YaHei";
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 16px;
   cursor: default;
   user-select: none;
@@ -53,23 +54,29 @@ svg {
 
 // Header
 .header {
-  height: 38px;
-  line-height: 38px;
+  height: 48px;
+  line-height: 48px;
   position: relative;
   text-align: center;
   font-size: 16px;
+  font-weight: 600;
   @include themify($themes) {
     color: themed("black-1");
     background: themed("white-1");
-    border-bottom: themed("grey-2") 1px solid;
+    border-bottom: themed("grey-2") 2px solid;
   }
 
   .icon {
     @include hover-black;
     cursor: pointer;
+    transition: all 0.2s ease;
 
     svg {
       vertical-align: sub;
+    }
+
+    &:hover {
+      transform: scale(1.1);
     }
   }
 }
@@ -146,24 +153,35 @@ svg {
 
 #search {
   position: relative;
+  margin: 10px;
+  border-radius: 8px;
   @include themify($themes) {
-    background: themed("white-1");
-    border: themed("grey-2") 1px solid;
-    border-top: none;
+    background: themed("grey-3");
+    border: themed("grey-2") 2px solid;
   }
+  transition: all 0.2s ease;
 
   &:hover {
     @include themify($themes) {
-      background: themed("white-search");
+      border-color: themed("grey-1");
     }
   }
 
+  &:focus-within {
+    @include themify($themes) {
+      border-color: themed("blue-1");
+      background: themed("white-1");
+    }
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+
   input {
-    font-family: arial, "Microsoft YaHei";
+    font-family: "Plus Jakarta Sans", sans-serif;
     background: none;
     border: none;
     width: 100%;
     height: 100%;
+    padding: 0 10px;
     @include themify($themes) {
       color: themed("black-search");
     }
@@ -299,28 +317,41 @@ svg {
 .entry {
   margin: 10px;
   margin-right: 0;
-  padding: 10px;
+  padding: 16px;
   @include themify($themes) {
-    border: themed("grey-2") 1px solid;
+    border: none;
     background: themed("white-1");
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
-  border-radius: 2px;
+  border-radius: 12px;
   position: relative;
   display: block;
   cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    @include themify($themes) {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    transform: translateY(-2px);
+  }
 
   .issuer {
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 500;
     @include themify($themes) {
       color: themed("black-1");
     }
     width: 80%;
     text-overflow: ellipsis;
     overflow: hidden;
+    margin-bottom: 8px;
   }
 
   .code {
-    font-size: 36px;
+    font-size: 38px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
     @include themify($themes) {
       color: themed("blue-1");
     }
@@ -523,14 +554,14 @@ svg {
 .message-box {
   position: absolute;
   width: 300px;
-  padding: 10px;
+  padding: 20px;
   @include themify($themes) {
     color: themed("black-1");
-    border: themed("grey-1") 1px solid;
+    border: none;
     background: themed("white-1");
-    box-shadow: 1px 1px 3px themed("grey-1");
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   }
-  border-radius: 2px;
+  border-radius: 16px;
   left: 10px;
   top: 150px;
   z-index: 1000;
@@ -596,13 +627,14 @@ svg {
   position: absolute;
   height: 460px;
   width: 300px;
-  padding: 10px;
+  padding: 16px;
   @include themify($themes) {
     color: themed("black-1");
-    border: themed("grey-1");
+    border: none;
     background: themed("white-1");
-    box-shadow: 1px 1px 3px themed("grey-1");
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   }
+  border-radius: 16px;
   left: 10px;
   top: -1000px;
   z-index: 100;
@@ -663,34 +695,38 @@ svg {
   .control-group input[type="checkbox"]::before {
     content: "";
     display: block;
-    width: 28px;
-    height: 12px;
-    border-radius: 8px;
-    background: grey;
-    margin: 2px 3px;
-    transition: all 80ms linear;
+    width: 32px;
+    height: 16px;
+    border-radius: 12px;
+    @include themify($themes) {
+      background: themed("grey-2");
+    }
+    margin: 0px;
+    transition: all 0.2s ease;
   }
 
   .control-group input[type="checkbox"]::after {
     content: "";
     display: block;
     position: absolute;
-    width: 16px;
-    height: 16px;
-    border-radius: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 12px;
     background: white;
-    top: 0;
-    left: 0;
-    box-shadow: 0 0 2px black;
-    transition: all 80ms linear;
+    top: -2px;
+    left: -2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
   }
 
   .control-group input[type="checkbox"]:checked::before {
-    background: #08c;
+    @include themify($themes) {
+      background: themed("blue-1");
+    }
   }
 
   .control-group input[type="checkbox"]:checked::after {
-    transform: matrix(1, 0, 0, 1, 18, 0);
+    transform: matrix(1, 0, 0, 1, 16, 0);
   }
 
   .combo-label {
@@ -861,23 +897,26 @@ svg {
 
   .menuList {
     margin: 10px;
-    border-radius: 2px;
+    border-radius: 12px;
+    overflow: hidden;
     @include themify($themes) {
-      border: themed("grey-2") 1px solid;
+      border: none;
       background: themed("white-1");
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
 
     p {
       position: relative;
-      padding: 10px;
-      font-size: 16px;
+      padding: 14px 16px;
+      font-size: 15px;
       cursor: pointer;
       display: grid;
       grid-template-columns: 30px auto;
       @include themify($themes) {
         border-bottom: themed("grey-2") 1px solid;
-        color: themed("grey-1");
+        color: themed("black-1");
       }
+      transition: all 0.15s ease;
 
       span {
         display: flex;
@@ -887,20 +926,20 @@ svg {
           @include themify($themes) {
             fill: themed("grey-1");
           }
-          height: 16px;
-          width: 16px;
+          height: 18px;
+          width: 18px;
         }
       }
 
       &:hover {
         @include themify($themes) {
           background: themed("blue-menu");
-          color: themed("black-1");
+          color: themed("blue-1");
         }
 
         svg {
           @include themify($themes) {
-            fill: themed("black-1");
+            fill: themed("blue-1");
           }
         }
       }
@@ -1034,7 +1073,7 @@ svg {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
   @include themify($themes) {
     background: themed("grey-3");
   }
@@ -1042,10 +1081,16 @@ svg {
 
 ::-webkit-scrollbar-thumb {
   @include themify($themes) {
-    background-color: themed("grey-1");
+    background-color: themed("grey-2");
     border: 2px solid themed("grey-3");
   }
-  border-radius: 5px;
+  border-radius: 6px;
+
+  &:hover {
+    @include themify($themes) {
+      background-color: themed("grey-1");
+    }
+  }
 }
 
 // Dark overrides
