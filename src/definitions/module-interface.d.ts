@@ -55,6 +55,8 @@ interface StyleState {
     notificationFadein: boolean;
     notificationFadeout: boolean;
     hotpDisabled: boolean;
+    showExchangeRate: boolean;
+    activeTab: string;
   };
 }
 

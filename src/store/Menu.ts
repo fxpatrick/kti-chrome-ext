@@ -1,4 +1,3 @@
-import { isSafari } from "../browser";
 import { UserSettings } from "../models/settings";
 import { ManagedStorage } from "../models/storage";
 
@@ -13,7 +12,7 @@ export class Menu implements Module {
         useAutofill: UserSettings.items.autofill === true,
         smartFilter: UserSettings.items.smartFilter === true,
         enableContextMenu: UserSettings.items.enableContextMenu === true,
-        theme: UserSettings.items.theme || (isSafari ? "flat" : "normal"),
+        theme: UserSettings.items.theme || "normal",
         autolock: Number(UserSettings.items.autolock) || 30,
         backupDisabled: await ManagedStorage.get("disableBackup", false),
         exportDisabled: await ManagedStorage.get("disableExport", false),

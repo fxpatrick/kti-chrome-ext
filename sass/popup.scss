@@ -128,6 +128,60 @@ svg {
   bottom: 0;
 }
 
+#i-exchange-rate {
+  position: absolute;
+  right: 70px;
+  bottom: 0;
+}
+
+// Tabs
+.tabs {
+  display: flex;
+  @include themify($themes) {
+    background: themed("white-1");
+    border-bottom: themed("grey-2") 2px solid;
+  }
+
+  .tab {
+    flex: 1;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    @include themify($themes) {
+      color: themed("grey-1");
+      background: themed("white-1");
+    }
+
+    &:hover {
+      @include themify($themes) {
+        color: themed("blue-1");
+      }
+    }
+
+    &.active {
+      @include themify($themes) {
+        color: themed("blue-1");
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        @include themify($themes) {
+          background: themed("blue-1");
+        }
+      }
+    }
+  }
+}
+
 // Search & Filter
 .under-header {
   padding: 0 10px;
@@ -198,6 +252,65 @@ svg {
   }
 
   #searchHintBorder {
+    @include themify($themes) {
+      color: themed("white-1");
+      background: themed("grey-search");
+    }
+    text-align: center;
+    border-radius: 1.5px;
+    line-height: 16px;
+    font-weight: bolder;
+  }
+}
+
+#exchange-search {
+  display: block;
+  position: relative;
+  margin: 10px;
+  border-radius: 8px;
+  @include themify($themes) {
+    background: themed("grey-3");
+    border: themed("grey-2") 2px solid;
+  }
+  transition: all 0.2s ease;
+
+  &:hover {
+    @include themify($themes) {
+      border-color: themed("grey-1");
+    }
+  }
+
+  &:focus-within {
+    @include themify($themes) {
+      border-color: themed("blue-1");
+      background: themed("white-1");
+    }
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+
+  input {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    background: none;
+    border: none;
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    @include themify($themes) {
+      color: themed("black-search");
+    }
+  }
+
+  #exchangeSearchHint {
+    position: absolute;
+    top: -1px;
+    right: 0px;
+    padding-right: 10px;
+    display: grid;
+    grid-template-rows: 4.5px 15px 4.5px;
+    grid-template-columns: 15px;
+  }
+
+  #exchangeSearchHintBorder {
     @include themify($themes) {
       color: themed("white-1");
       background: themed("grey-search");
@@ -1410,5 +1523,88 @@ svg {
         border-bottom: #f5f4f7 1px solid;
       }
     }
+  }
+}
+
+// Exchange Rate Page
+.exchange-rate-page {
+  padding: 10px;
+}
+
+.exchange-rate-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.exchange-rate-list {
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+
+.exchange-rate-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  @include themify($themes) {
+    background: themed("white-1");
+    border: 1px solid themed("grey-2");
+    color: themed("black-1");
+  }
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    @include themify($themes) {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-color: themed("blue-1");
+    }
+  }
+}
+
+.exchange-rate-left {
+  flex: 1;
+
+  .currency-code {
+    font-weight: 600;
+    font-size: 14px;
+    @include themify($themes) {
+      color: themed("black-1");
+    }
+    margin-bottom: 2px;
+  }
+
+  .currency-name {
+    font-size: 11px;
+    @include themify($themes) {
+      color: themed("grey-1");
+    }
+  }
+}
+
+.exchange-rate-right {
+  text-align: right;
+
+  .rate {
+    font-weight: 700;
+    font-size: 16px;
+    @include themify($themes) {
+      color: themed("blue-1");
+    }
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.exchange-rate-footer {
+  text-align: center;
+  padding: 10px;
+  font-size: 11px;
+  @include themify($themes) {
+    color: themed("grey-1");
   }
 }

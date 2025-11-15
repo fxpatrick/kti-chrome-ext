@@ -269,11 +269,11 @@ function getBackupToken(service: string) {
         redirUrl;
     } else if (service === "drive") {
       if (navigator.userAgent.indexOf("Edg") !== -1) {
-        redirUrl = encodeURIComponent("https://authenticator.cc/oauth-edge");
+        redirUrl = encodeURIComponent("https://kausa.tech");
       } else if (isFirefox) {
         redirUrl = encodeURIComponent(chrome.identity.getRedirectURL());
       } else {
-        redirUrl = encodeURIComponent("https://authenticator.cc/oauth");
+        redirUrl = encodeURIComponent("https://kausa.tech");
       }
 
       authUrl =
@@ -443,7 +443,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
   let url: string | null = null;
 
   if (isChrome) {
-    url = "https://otp.ee/chromeissues";
+    url = "https://kausa.tech";
   }
 
   if (url) {

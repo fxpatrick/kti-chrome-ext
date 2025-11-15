@@ -84,6 +84,7 @@ import IconScan from "../../../svg/scan.svg";
 import IconPencil from "../../../svg/pencil.svg";
 import IconCheck from "../../../svg/check.svg";
 import IconPlus from "../../../svg/plus.svg";
+import IconDatabase from "../../../svg/database.svg";
 import { isFirefox } from "../../browser";
 
 const computedPrototype = [
@@ -134,6 +135,9 @@ export default Vue.extend({
       }
       this.$store.commit("style/showInfo");
       this.$store.commit("currentView/changeView", page);
+    },
+    showExchangeRate() {
+      this.$store.commit("style/toggleExchangeRate");
     },
     editEntry() {
       this.$store.commit("style/toggleEdit");
@@ -201,6 +205,7 @@ export default Vue.extend({
     IconPencil,
     IconCheck,
     IconPlus,
+    IconDatabase,
   },
 });
 </script>

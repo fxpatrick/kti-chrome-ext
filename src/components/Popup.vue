@@ -19,12 +19,33 @@
     v-on:keydown="hideoutline = false"
   >
     <MainHeader />
+
+    <div class="tabs">
+      <div
+        class="tab"
+        v-bind:class="{ active: style.activeTab === 'authenticator' }"
+        v-on:click="setTab('authenticator')"
+      >
+        Authenticator
+      </div>
+      <div
+        class="tab"
+        v-bind:class="{ active: style.activeTab === 'exchange-rate' }"
+        v-on:click="setTab('exchange-rate')"
+      >
+        Kurs Pajak
+      </div>
+    </div>
+
     <MainBody
+      v-if="style.activeTab === 'authenticator'"
       v-bind:class="{
         timeout: style.timeout && !style.isEditing,
         edit: style.isEditing,
       }"
     />
+
+    <ExchangeRatePage v-if="style.activeTab === 'exchange-rate'" />
 
     <MenuPage
       id="menu"
@@ -74,6 +95,7 @@ import MainBody from "./Popup/MainBody.vue";
 import MenuPage from "./Popup/MenuPage.vue";
 import PageHandler from "./Popup/PageHandler.vue";
 import NotificationHandler from "./Popup/NotificationHandler.vue";
+import ExchangeRatePage from "./Popup/ExchangeRatePage.vue";
 
 const computedPrototype = [
   mapState("style", ["style"]),
@@ -99,6 +121,9 @@ export default Vue.extend({
     hideQr() {
       this.$store.commit("style/hideQr");
     },
+    setTab(tab: string) {
+      this.$store.commit("style/setActiveTab", tab);
+    },
   },
   components: {
     MainHeader,
@@ -106,6 +131,7 @@ export default Vue.extend({
     MenuPage,
     PageHandler,
     NotificationHandler,
+    ExchangeRatePage,
   },
 });
 </script>

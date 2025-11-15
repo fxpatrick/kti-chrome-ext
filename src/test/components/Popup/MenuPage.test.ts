@@ -89,8 +89,7 @@ describe("MenuPage", () => {
       );
       await clickMenuPageButtonByTitle(wrapper, "Feedback");
       assert.ok(
-        chrome.tabs.create.withArgs({ url: "https://otp.ee/chromeissues" })
-          .calledOnce,
+        chrome.tabs.create.withArgs({ url: "https://kausa.tech" }).calledOnce,
         "Tab create should be called with the Chrome URL"
       );
     });
@@ -101,8 +100,7 @@ describe("MenuPage", () => {
       );
       await clickMenuPageButtonByTitle(wrapper, "Feedback");
       assert.ok(
-        chrome.tabs.create.withArgs({ url: "https://otp.ee/edgeissues" })
-          .calledOnce,
+        chrome.tabs.create.withArgs({ url: "https://kausa.tech" }).calledOnce,
         "Tab create should be called with the Edge URL"
       );
     });
@@ -113,8 +111,7 @@ describe("MenuPage", () => {
       );
       await clickMenuPageButtonByTitle(wrapper, "Feedback");
       assert.ok(
-        chrome.tabs.create.withArgs({ url: "https://otp.ee/firefoxissues" })
-          .calledOnce,
+        chrome.tabs.create.withArgs({ url: "https://kausa.tech" }).calledOnce,
         "Tab create should be called with the Firefox URL"
       );
     });
@@ -123,8 +120,7 @@ describe("MenuPage", () => {
       mockUserAgent("Unknown");
       await clickMenuPageButtonByTitle(wrapper, "Feedback");
       assert.ok(
-        chrome.tabs.create.withArgs({ url: "https://otp.ee/chromeissues" })
-          .called,
+        chrome.tabs.create.withArgs({ url: "https://kausa.tech" }).called,
         "Tab create should be called with the Chrome URL"
       );
     });

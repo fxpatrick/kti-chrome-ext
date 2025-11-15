@@ -15,6 +15,8 @@ export class Style implements Module {
           notificationFadein: false,
           notificationFadeout: false,
           hotpDisabled: false,
+          showExchangeRate: true,
+          activeTab: "authenticator", // authenticator or exchange-rate
         },
       },
       mutations: {
@@ -75,6 +77,12 @@ export class Style implements Module {
         },
         toggleHotpDisabled(state: StyleState) {
           state.style.hotpDisabled = !state.style.hotpDisabled;
+        },
+        toggleExchangeRate(state: StyleState) {
+          state.style.showExchangeRate = !state.style.showExchangeRate;
+        },
+        setActiveTab(state: StyleState, tab: string) {
+          state.style.activeTab = tab;
         },
       },
       getters: {
