@@ -69,7 +69,7 @@ export class Menu implements Module {
   private resize(zoom: number) {
     if (zoom !== 100) {
       document.body.style.marginBottom = 480 * (zoom / 100 - 1) + "px";
-      document.body.style.marginRight = 320 * (zoom / 100 - 1) + "px";
+      document.body.style.marginRight = 400 * (zoom / 100 - 1) + "px";
       document.body.style.transform = "scale(" + zoom / 100 + ")";
     }
   }

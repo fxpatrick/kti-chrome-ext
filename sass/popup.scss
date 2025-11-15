@@ -14,7 +14,7 @@
 }
 
 body {
-  width: 320px;
+  width: 400px;
   height: 480px;
   transform-origin: left top;
   overflow: hidden;
@@ -699,7 +699,7 @@ svg {
 }
 
 #qr {
-  width: 320px;
+  width: 400px;
   height: 480px;
   top: -1000px;
   left: 0;
@@ -980,7 +980,7 @@ svg {
 
 // Menu
 #menu {
-  width: 320px;
+  width: 400px;
   height: 480px;
   position: absolute;
   left: -1000px;
@@ -1529,74 +1529,108 @@ svg {
 // Exchange Rate Page
 .exchange-rate-page {
   padding: 10px;
+  height: 442px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  @include themify($themes) {
+    background: themed("grey-background");
+  }
 }
 
 .exchange-rate-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  height: 100%;
 }
 
-.exchange-rate-list {
-  max-height: 320px;
+.exchange-rate-table-wrapper {
   overflow-y: auto;
-  padding: 0 10px;
-  margin-bottom: 10px;
-}
-
-.exchange-rate-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 12px;
-  margin-bottom: 6px;
+  overflow-x: hidden;
+  flex: 1;
+  margin: 0 10px 10px 10px;
   border-radius: 8px;
   @include themify($themes) {
     background: themed("white-1");
-    border: 1px solid themed("grey-2");
-    color: themed("black-1");
-  }
-  transition: all 0.2s ease;
-
-  &:hover {
-    transform: translateY(-1px);
-    @include themify($themes) {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      border-color: themed("blue-1");
-    }
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
 }
 
-.exchange-rate-left {
-  flex: 1;
+.exchange-rate-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Plus Jakarta Sans", sans-serif;
 
-  .currency-code {
-    font-weight: 600;
-    font-size: 14px;
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
     @include themify($themes) {
-      color: themed("black-1");
+      background: themed("white-1");
+      border-bottom: 2px solid themed("grey-2");
     }
-    margin-bottom: 2px;
+
+    th {
+      padding: 8px 6px;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      @include themify($themes) {
+        color: themed("grey-1");
+      }
+      text-align: left;
+
+      &.text-right {
+        text-align: right;
+      }
+    }
   }
 
-  .currency-name {
-    font-size: 11px;
-    @include themify($themes) {
-      color: themed("grey-1");
-    }
-  }
-}
+  tbody {
+    tr.exchange-rate-row {
+      @include themify($themes) {
+        border-bottom: 1px solid themed("grey-2");
+      }
+      transition: background-color 0.15s ease;
 
-.exchange-rate-right {
-  text-align: right;
+      &:hover {
+        @include themify($themes) {
+          background: themed("white-1");
+        }
+      }
 
-  .rate {
-    font-weight: 700;
-    font-size: 16px;
-    @include themify($themes) {
-      color: themed("blue-1");
+      td {
+        padding: 8px 6px;
+        font-size: 13px;
+
+        &.currency-code {
+          font-weight: 600;
+          width: 60px;
+          @include themify($themes) {
+            color: themed("black-1");
+          }
+        }
+
+        &.currency-name {
+          @include themify($themes) {
+            color: themed("grey-1");
+          }
+        }
+
+        &.rate {
+          font-weight: 600;
+          width: 100px;
+          @include themify($themes) {
+            color: themed("blue-1");
+          }
+          font-variant-numeric: tabular-nums;
+        }
+
+        &.text-right {
+          text-align: right;
+        }
+      }
     }
-    font-variant-numeric: tabular-nums;
   }
 }
 

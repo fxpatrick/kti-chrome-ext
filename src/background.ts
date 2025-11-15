@@ -580,7 +580,7 @@ async function updateContextMenu() {
               url: chrome.runtime.getURL(popupUrl),
               type: windowType as chrome.windows.createTypeEnum,
               height: 400,
-              width: 320,
+              width: 400,
             });
 
             // https://stackoverflow.com/a/56483156

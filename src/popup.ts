@@ -139,6 +139,20 @@ async function init() {
         if (instance.$store.getters["style/isMenuShown"]) {
           return;
         }
+
+        // Check if we're on the exchange-rate tab
+        const activeTab = instance.$store.state.style.style.activeTab;
+        if (activeTab === "exchange-rate") {
+          const exchangeSearchDiv = document.getElementById("exchange-search");
+          const exchangeSearchInput = document.getElementById("exchangeSearchInput");
+          if (exchangeSearchInput && exchangeSearchDiv) {
+            exchangeSearchDiv.style.display = "block";
+            exchangeSearchInput.focus();
+          }
+          return;
+        }
+
+        // Default behavior for authenticator tab
         instance.$store.commit("accounts/stopFilter");
         // It won't focus the texfield if vue unhides the div
         instance.$store.commit("accounts/showSearch");
@@ -149,6 +163,30 @@ async function init() {
         }
         searchDiv.style.display = "block";
         searchInput.focus();
+      }
+    },
+    false
+  );
+
+  // Tab switching shortcuts: A for Authenticator, K for Kurs Pajak
+  document.addEventListener(
+    "keyup",
+    (e) => {
+      // Don't switch tabs if menu is shown
+      if (instance.$store.getters["style/isMenuShown"]) {
+        return;
+      }
+
+      // Don't switch tabs if user is typing in an input field
+      const target = e.target as HTMLElement;
+      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) {
+        return;
+      }
+
+      if (e.key === "a" || e.key === "A") {
+        instance.$store.commit("style/setActiveTab", "authenticator");
+      } else if (e.key === "k" || e.key === "K") {
+        instance.$store.commit("style/setActiveTab", "exchange-rate");
       }
     },
     false
@@ -170,7 +208,7 @@ async function init() {
   if (query.get("popup")) {
     const zoom = Number(UserSettings.items.zoom) / 100 || 1;
     const correctHeight = 480 * zoom;
-    const correctWidth = 320 * zoom;
+    const correctWidth = 400 * zoom;
     if (
       window.innerHeight !== correctHeight ||
       window.innerWidth !== correctWidth

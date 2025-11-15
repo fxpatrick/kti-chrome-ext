@@ -25,20 +25,27 @@
     </div>
 
     <div v-else class="exchange-rate-container">
-      <div class="exchange-rate-list">
-        <div
-          v-for="rate in filteredRates"
-          :key="rate.currencyCode"
-          class="exchange-rate-item"
-        >
-          <div class="exchange-rate-left">
-            <div class="currency-code">{{ rate.currencyCode }}</div>
-            <div class="currency-name">{{ rate.currency }}</div>
-          </div>
-          <div class="exchange-rate-right">
-            <div class="rate">{{ rate.rateFormatted }}</div>
-          </div>
-        </div>
+      <div class="exchange-rate-table-wrapper">
+        <table class="exchange-rate-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Currency</th>
+              <th class="text-right">Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="rate in filteredRates"
+              :key="rate.currencyCode"
+              class="exchange-rate-row"
+            >
+              <td class="currency-code">{{ rate.currencyCode }}</td>
+              <td class="currency-name">{{ rate.currency }}</td>
+              <td class="rate text-right">{{ rate.rateFormatted }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <div class="exchange-rate-footer">
@@ -61,20 +68,52 @@ export default Vue.extend({
       loading: true,
       error: "",
       searchQuery: "",
+      // Most commonly used currencies (in order of usage)
+      currencyPriority: [
+        "USD", "EUR", "JPY", "GBP", "CNY", "AUD", "CAD", "CHF",
+        "HKD", "SGD", "SEK", "KRW", "NOK", "NZD", "INR", "MXN",
+        "TWD", "ZAR", "BRL", "DKK", "PLN", "THB", "ILS", "IDR",
+        "CZK", "AED", "TRY", "HUF", "CLP", "SAR", "PHP", "MYR",
+        "COP", "RUB", "RON", "PEN", "BHD", "BGN", "ARS"
+      ] as string[],
     };
   },
   computed: {
     filteredRates(): ExchangeRate[] {
-      if (!this.searchQuery) {
-        return this.rates;
+      let filtered = this.rates;
+
+      if (this.searchQuery) {
+        const query = this.searchQuery.toLowerCase();
+        filtered = this.rates.filter(
+          (rate) =>
+            rate.currency.toLowerCase().includes(query) ||
+            rate.currencyCode.toLowerCase().includes(query)
+        );
       }
 
-      const query = this.searchQuery.toLowerCase();
-      return this.rates.filter(
-        (rate) =>
-          rate.currency.toLowerCase().includes(query) ||
-          rate.currencyCode.toLowerCase().includes(query)
-      );
+      // Sort by currency priority
+      return filtered.sort((a, b) => {
+        const aPriority = this.currencyPriority.indexOf(a.currencyCode);
+        const bPriority = this.currencyPriority.indexOf(b.currencyCode);
+
+        // If both currencies are in priority list, sort by priority
+        if (aPriority !== -1 && bPriority !== -1) {
+          return aPriority - bPriority;
+        }
+
+        // If only a is in priority list, a comes first
+        if (aPriority !== -1) {
+          return -1;
+        }
+
+        // If only b is in priority list, b comes first
+        if (bPriority !== -1) {
+          return 1;
+        }
+
+        // If neither is in priority list, sort alphabetically by currency code
+        return a.currencyCode.localeCompare(b.currencyCode);
+      });
     },
   },
   methods: {
