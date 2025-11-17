@@ -33,7 +33,7 @@
         v-bind:class="{ active: style.activeTab === 'exchange-rate' }"
         v-on:click="setTab('exchange-rate')"
       >
-        Kurs Pajak
+        Kurs KMK
       </div>
     </div>
 

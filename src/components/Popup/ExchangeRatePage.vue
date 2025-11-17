@@ -42,7 +42,13 @@
             >
               <td class="currency-code">{{ rate.currencyCode }}</td>
               <td class="currency-name">{{ rate.currency }}</td>
-              <td class="rate text-right">{{ rate.rateFormatted }}</td>
+              <td
+                class="rate text-right clickable"
+                @click="copyToClipboard(rate.rateFormatted)"
+                :title="'Click to copy ' + rate.rateFormatted"
+              >
+                {{ rate.rateFormatted }}
+              </td>
             </tr>
           </tbody>
         </table>
@@ -53,6 +59,14 @@
           i18n.exchange_rate_source || "Source: kurs.kausa.tech"
         }}</small>
       </div>
+    </div>
+
+    <!-- Copy notification -->
+    <div
+      v-if="showCopyNotification"
+      class="copy-notification"
+    >
+      Copied to clipboard
     </div>
   </div>
 </template>
@@ -68,6 +82,7 @@ export default Vue.extend({
       loading: true,
       error: "",
       searchQuery: "",
+      showCopyNotification: false,
       // Most commonly used currencies (in order of usage)
       currencyPriority: [
         "USD", "EUR", "JPY", "GBP", "CNY", "AUD", "CAD", "CHF",
@@ -148,6 +163,24 @@ export default Vue.extend({
         console.error("Error loading exchange rates:", err);
       } finally {
         this.loading = false;
+      }
+    },
+    async copyToClipboard(text: string) {
+      try {
+        // Remove any formatting characters and get just the number
+        const cleanText = text.replace(/[^\d.,]/g, "");
+
+        await navigator.clipboard.writeText(cleanText);
+
+        // Show notification
+        this.showCopyNotification = true;
+
+        // Hide notification after 2 seconds
+        setTimeout(() => {
+          this.showCopyNotification = false;
+        }, 2000);
+      } catch (err) {
+        console.error("Failed to copy to clipboard:", err);
       }
     },
   },

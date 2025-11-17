@@ -168,7 +168,7 @@ async function init() {
     false
   );
 
-  // Tab switching shortcuts: A for Authenticator, K for Kurs Pajak
+  // Tab switching shortcuts: A for Authenticator, K for Kurs KMK
   document.addEventListener(
     "keyup",
     (e) => {

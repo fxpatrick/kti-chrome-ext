@@ -1,4 +1,31 @@
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('roboto-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: url('roboto-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  src: url('roboto-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: url('roboto-700.woff2') format('woff2');
+}
+
 @import "ui";
 
 // Structure
@@ -18,7 +45,7 @@ body {
   height: 480px;
   transform-origin: left top;
   overflow: hidden;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   cursor: default;
   user-select: none;
@@ -230,7 +257,7 @@ svg {
   }
 
   input {
-    font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Roboto", sans-serif;
     background: none;
     border: none;
     width: 100%;
@@ -289,7 +316,7 @@ svg {
   }
 
   input {
-    font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Roboto", sans-serif;
     background: none;
     border: none;
     width: 100%;
@@ -1558,12 +1585,11 @@ svg {
 .exchange-rate-table {
   width: 100%;
   border-collapse: collapse;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
 
   thead {
     position: sticky;
     top: 0;
-    z-index: 1;
     @include themify($themes) {
       background: themed("white-1");
       border-bottom: 2px solid themed("grey-2");
@@ -1624,6 +1650,23 @@ svg {
             color: themed("blue-1");
           }
           font-variant-numeric: tabular-nums;
+
+          &.clickable {
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s ease;
+
+            &:hover {
+              @include themify($themes) {
+                color: themed("blue-2");
+              }
+              transform: scale(1.05);
+            }
+
+            &:active {
+              transform: scale(0.95);
+            }
+          }
         }
 
         &.text-right {
@@ -1640,5 +1683,34 @@ svg {
   font-size: 11px;
   @include themify($themes) {
     color: themed("grey-1");
+  }
+}
+
+.copy-notification {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  @include themify($themes) {
+    background: themed("black-1");
+    color: themed("white-1");
+  }
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideInUp 0.3s ease-out;
+  z-index: 1000;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
   }
 }

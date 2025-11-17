@@ -12,10 +12,10 @@
           <span><IconAdvisor /></span>{{ i18n.advisor }}
         </p> -->
         <p
-          v-bind:title="i18n.exchange_rate || 'Kurs Pajak'"
+          v-bind:title="i18n.exchange_rate || 'Kurs KMK'"
           v-on:click="showExchangeRate()"
         >
-          <span><IconDatabase /></span>{{ i18n.exchange_rate || "Kurs Pajak" }}
+          <span><IconDatabase /></span>{{ i18n.exchange_rate || "Kurs KMK" }}
         </p>
         <!-- <a
           href="permissions.html"
