@@ -7,17 +7,17 @@
       </div>
     </div>
     <div id="menuBody">
-      <div class="menuList">
-        <!-- <p v-bind:title="i18n.advisor" v-on:click="showInfo('AdvisorPage')">
+      <!-- <div class="menuList">
+        <p v-bind:title="i18n.advisor" v-on:click="showInfo('AdvisorPage')">
           <span><IconAdvisor /></span>{{ i18n.advisor }}
-        </p> -->
+        </p>
         <p
           v-bind:title="i18n.exchange_rate || 'Kurs KMK'"
           v-on:click="showExchangeRate()"
         >
           <span><IconDatabase /></span>{{ i18n.exchange_rate || "Kurs KMK" }}
         </p>
-        <!-- <a
+        <a
           href="permissions.html"
           target="_blank"
           style="text-decoration: none"
@@ -25,8 +25,8 @@
           <p v-bind:title="i18n.permissions">
             <span><IconClipboardCheck /></span>{{ i18n.permissions }}
           </p>
-        </a> -->
-      </div>
+        </a>
+      </div> -->
       <div class="menuList">
         <p v-bind:title="i18n.backup" v-on:click="showInfo('BackupPage')">
           <span><IconExchange /></span>{{ i18n.backup }}
@@ -44,15 +44,15 @@
         >
           <span><IconSync /></span>{{ i18n.sync_clock }}
         </p>
-        <!-- <p
+        <p
           v-bind:title="i18n.resize_popup_page"
           v-on:click="showInfo('PreferencesPage')"
         >
           <span><IconWrench /></span>{{ i18n.resize_popup_page }}
-        </p> -->
+        </p>
       </div>
-      <div class="menuList">
-        <!-- <p v-bind:title="i18n.feedback" v-on:click="openHelp()">
+      <!-- <div class="menuList">
+        <p v-bind:title="i18n.feedback" v-on:click="openHelp()">
           <span><IconComments /></span>{{ i18n.feedback }}
         </p>
         <p
@@ -66,13 +66,13 @@
           v-on:click="openLink('https://otp.ee/sourcecode')"
         >
           <span><IconCode /></span>{{ i18n.source }}
-        </p> -->
+        </p>
         <a href="licenses.html" target="_blank" style="text-decoration: none">
           <p v-bind:title="i18n.about">
             <span><IconInfo /></span>{{ i18n.about }}
           </p>
         </a>
-      </div>
+      </div> -->
       <div id="version">Version {{ version }}</div>
     </div>
   </div>

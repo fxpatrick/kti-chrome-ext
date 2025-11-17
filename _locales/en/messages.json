@@ -1,14 +1,14 @@
 {
   "extName": {
-    "message": "Authenticator",
+    "message": "Docfast Toolkit",
     "description": "Extension Name."
   },
   "extShortName": {
-    "message": "Authenticator",
+    "message": "Docfast Toolkit",
     "description": "Extension Short Name."
   },
   "extDesc": {
-    "message": "Authenticator generates two-factor authentication codes in your browser.",
+    "message": "Docfast Toolkit - Authenticator and Indonesian tax exchange rate tool.",
     "description": "Extension Description."
   },
   "added": {

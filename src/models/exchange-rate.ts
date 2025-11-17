@@ -139,7 +139,12 @@ export class ExchangeRateService {
 
     apiResponse.data.forEach((item, index) => {
       const currencyCode = item.code;
-      const rate = item.rate;
+      let rate = item.rate;
+
+      // JPY rates should be divided by 100
+      if (currencyCode === "JPY") {
+        rate = rate / 100;
+      }
 
       // Get country code for flag
       const countryCode = this.CURRENCY_TO_COUNTRY[currencyCode] || "";

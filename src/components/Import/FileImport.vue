@@ -59,19 +59,28 @@ export default Vue.extend({
           } = {};
           let failedCount = 0;
           let succeededCount = 0;
-          try {
-            importData = JSON.parse(reader.result as string);
-            succeededCount = Object.keys(importData).filter(
-              (key) => ["key", "enc", "hash"].indexOf(key) === -1
-            ).length;
-          } catch (e) {
-            console.warn(e);
-            const result = await getEntryDataFromOTPAuthPerLine(
-              reader.result as string
-            );
+
+          const fileContent = reader.result as string;
+
+          // Check if file contains OTP auth URLs instead of JSON
+          if (fileContent.trim().startsWith("otpauth://")) {
+            const result = await getEntryDataFromOTPAuthPerLine(fileContent);
             importData = result.exportData;
             failedCount = result.failedCount;
             succeededCount = result.succeededCount;
+          } else {
+            try {
+              importData = JSON.parse(fileContent);
+              succeededCount = Object.keys(importData).filter(
+                (key) => ["key", "enc", "hash"].indexOf(key) === -1
+              ).length;
+            } catch (e) {
+              // If JSON parsing fails, try OTP auth format
+              const result = await getEntryDataFromOTPAuthPerLine(fileContent);
+              importData = result.exportData;
+              failedCount = result.failedCount;
+              succeededCount = result.succeededCount;
+            }
           }
 
           let key: { enc: string } | null = null;

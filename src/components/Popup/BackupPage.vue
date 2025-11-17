@@ -57,7 +57,7 @@
     <a-button-link href="import.html">{{ i18n.import_backup }}</a-button-link>
     <br />
     <!-- 3rd Party Backup Services -->
-    <div v-show="!backupDisabled && isBackupServiceSupported">
+    <!-- <div v-show="!backupDisabled && isBackupServiceSupported">
       <div class="text">
         {{ i18n.storage_sync_info }}
       </div>
@@ -65,7 +65,7 @@
       <a-button @click="showInfo('DrivePage')"> Google Drive </a-button>
       <a-button @click="showInfo('OneDrivePage')"> OneDrive </a-button>
       <a-button @click="showInfo('DropboxPage')"> Dropbox </a-button>
-    </div>
+    </div> -->
   </div>
 </template>
 <script lang="ts">
