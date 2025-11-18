@@ -1798,6 +1798,7 @@ svg {
     }
     box-sizing: border-box;
     transition: all 0.2s ease;
+    margin-bottom: 12px;
 
     &:focus {
       outline: none;
@@ -1811,6 +1812,10 @@ svg {
       @include themify($themes) {
         color: themed("grey-3");
       }
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
     }
   }
 

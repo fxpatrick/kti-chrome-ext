@@ -6,7 +6,7 @@
         <h2>Welcome to Docfast Toolkit</h2>
       </div>
       <div class="company-setup-body">
-        <p>Please enter your company name to get started</p>
+        <p>Please enter your company information to get started</p>
         <input
           type="text"
           v-model="companyName"
@@ -14,6 +14,13 @@
           class="company-input"
           @keyup.enter="submitCompanyName"
           ref="companyInput"
+        />
+        <input
+          type="tel"
+          v-model="whatsappNumber"
+          placeholder="WhatsApp Number (e.g., +62812345678)"
+          class="company-input"
+          @keyup.enter="submitCompanyName"
         />
         <div v-if="errorMessage" class="error-message">
           {{ errorMessage }}
@@ -23,7 +30,7 @@
         <button
           class="submit-button"
           @click="submitCompanyName"
-          :disabled="!companyName.trim()"
+          :disabled="!companyName.trim() || !whatsappNumber.trim()"
         >
           Get Started
         </button>
@@ -39,6 +46,7 @@ export default Vue.extend({
   data() {
     return {
       companyName: "",
+      whatsappNumber: "",
       errorMessage: "",
     };
   },
@@ -51,11 +59,20 @@ export default Vue.extend({
   },
   methods: {
     async submitCompanyName() {
-      console.log("submitCompanyName called!", this.companyName);
+      console.log("submitCompanyName called!", {
+        companyName: this.companyName,
+        whatsappNumber: this.whatsappNumber
+      });
 
       if (!this.companyName.trim()) {
         this.errorMessage = "Company name is required";
         console.log("Company name is empty");
+        return;
+      }
+
+      if (!this.whatsappNumber.trim()) {
+        this.errorMessage = "WhatsApp number is required";
+        console.log("WhatsApp number is empty");
         return;
       }
 
@@ -68,10 +85,12 @@ export default Vue.extend({
 
         const formData = new URLSearchParams();
         formData.append("companyName", this.companyName.trim());
+        formData.append("whatsappNumber", this.whatsappNumber.trim());
         formData.append("timestamp", new Date().toISOString());
 
         console.log("Submitting to Google Apps Script:", {
           companyName: this.companyName.trim(),
+          whatsappNumber: this.whatsappNumber.trim(),
           timestamp: new Date().toISOString(),
           url: scriptUrl
         });
@@ -90,10 +109,11 @@ export default Vue.extend({
             // Continue anyway - not critical
           });
 
-        // Save company name to chrome storage
+        // Save company info to chrome storage
         console.log("Saving to chrome.storage.local...");
         await chrome.storage.local.set({
           companyName: this.companyName.trim(),
+          whatsappNumber: this.whatsappNumber.trim(),
           companySetupCompleted: true,
         });
         console.log("Saved to chrome.storage.local successfully");
@@ -107,8 +127,8 @@ export default Vue.extend({
         this.$store.commit("menu/setCompanySetupCompleted", true);
         console.log("Setup completed successfully!");
       } catch (error) {
-        console.error("Error saving company name:", error);
-        this.errorMessage = "Failed to save company name. Please try again.";
+        console.error("Error saving company information:", error);
+        this.errorMessage = "Failed to save company information. Please try again.";
       }
     },
   },
