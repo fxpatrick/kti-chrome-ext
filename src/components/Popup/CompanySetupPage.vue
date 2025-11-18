@@ -92,23 +92,24 @@ export default Vue.extend({
         const scriptUrl =
           "https://script.google.com/macros/s/AKfycbyFyJYKpOU0f_oqYo1XVWQ2ibDmfDLZkyh3CdwZYbC01CTtwXlFVGuPG07v4S2MLU90cQ/exec";
 
-        const formData = new URLSearchParams();
-        formData.append("companyName", this.companyName.trim());
-        formData.append("whatsappNumber", this.whatsappNumber.trim());
-        formData.append("timestamp", new Date().toISOString());
+        const queryString = new URLSearchParams({
+          companyName: this.companyName.trim(),
+          whatsappNumber: this.whatsappNumber.trim(),
+          timestamp: new Date().toISOString()
+        }).toString();
 
         console.log("Submitting to Google Apps Script:", {
           companyName: this.companyName.trim(),
           whatsappNumber: this.whatsappNumber.trim(),
           timestamp: new Date().toISOString(),
-          url: scriptUrl
+          url: scriptUrl + "?" + queryString
         });
 
-        // Submit data - fire and forget
-        fetch(scriptUrl, {
-          method: "POST",
+        const getUrl = scriptUrl + "?" + queryString;
+
+        fetch(getUrl, {
+          method: "GET",
           mode: "no-cors",
-          body: formData,
         })
           .then(() => {
             console.log("Data sent to Google Apps Script - SUCCESS");
