@@ -63,6 +63,9 @@
 
     <NotificationHandler />
 
+    <!-- COMPANY SETUP OVERLAY -->
+    <CompanySetupPage v-if="!companySetupCompleted" />
+
     <!-- EPHERMAL MESSAGE -->
     <div
       id="notification"
@@ -96,10 +99,11 @@ import MenuPage from "./Popup/MenuPage.vue";
 import PageHandler from "./Popup/PageHandler.vue";
 import NotificationHandler from "./Popup/NotificationHandler.vue";
 import ExchangeRatePage from "./Popup/ExchangeRatePage.vue";
+import CompanySetupPage from "./Popup/CompanySetupPage.vue";
 
 const computedPrototype = [
   mapState("style", ["style"]),
-  mapState("menu", ["theme"]),
+  mapState("menu", ["theme", "companySetupCompleted"]),
   mapState("qr", ["qr"]),
   mapState("notification", ["notification"]),
 ];
@@ -117,6 +121,11 @@ export default Vue.extend({
     };
   },
   computed,
+  mounted() {
+    console.log("=== POPUP.VUE MOUNTED ===");
+    console.log("companySetupCompleted:", this.$store.state.menu.companySetupCompleted);
+    console.log("Should show CompanySetupPage:", !this.$store.state.menu.companySetupCompleted);
+  },
   methods: {
     hideQr() {
       this.$store.commit("style/hideQr");
@@ -132,6 +141,7 @@ export default Vue.extend({
     PageHandler,
     NotificationHandler,
     ExchangeRatePage,
+    CompanySetupPage,
   },
 });
 </script>

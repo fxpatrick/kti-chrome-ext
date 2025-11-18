@@ -307,6 +307,8 @@ function pasteCode(code: string) {
     "totp",
     "twoFactorCode",
   ];
+  let codeFilled = false;
+
   for (const inputBox of inputBoxes) {
     for (const identity of identities) {
       if (
@@ -316,6 +318,10 @@ function pasteCode(code: string) {
         if (!inputBox.value || /^(\d{6}|\d{8})$/.test(inputBox.value)) {
           inputBox.value = code;
           fireInputEvents(inputBox);
+          codeFilled = true;
+        }
+        if (codeFilled) {
+          autoSubmit();
         }
         return;
       }
@@ -331,6 +337,10 @@ function pasteCode(code: string) {
     if (!inputBox.value || /^(\d{6}|\d{8})$/.test(inputBox.value)) {
       inputBox.value = code;
       fireInputEvents(inputBox);
+      codeFilled = true;
+    }
+    if (codeFilled) {
+      autoSubmit();
     }
     return;
   }
@@ -342,6 +352,10 @@ function pasteCode(code: string) {
     ) {
       inputBox.value = code;
       fireInputEvents(inputBox);
+      codeFilled = true;
+      if (codeFilled) {
+        autoSubmit();
+      }
       return;
     }
   }
@@ -360,6 +374,44 @@ function fireInputEvents(inputBox: HTMLInputElement) {
     inputBox.dispatchEvent(event);
   }
   return;
+}
+
+function autoSubmit() {
+  // Wait a bit for input events to propagate
+  setTimeout(() => {
+    // Try to find submit button
+    const submitButton = document.querySelector('button[type="submit"]') as HTMLButtonElement;
+    if (submitButton && !submitButton.disabled) {
+      submitButton.click();
+      return;
+    }
+
+    // Try to find submit input
+    const submitInput = document.querySelector('input[type="submit"]') as HTMLInputElement;
+    if (submitInput && !submitInput.disabled) {
+      submitInput.click();
+      return;
+    }
+
+    // Try to find any button with "submit" in the text (case-insensitive)
+    const _buttons = document.getElementsByTagName("button");
+    const buttons: HTMLButtonElement[] = [];
+    for (let i = 0; i < _buttons.length; i++) {
+      buttons.push(_buttons[i]);
+    }
+    for (const button of buttons) {
+      if (
+        !button.disabled &&
+        (button.textContent?.toLowerCase().includes("submit") ||
+          button.textContent?.toLowerCase().includes("continue") ||
+          button.textContent?.toLowerCase().includes("verify") ||
+          button.textContent?.toLowerCase().includes("confirm"))
+      ) {
+        button.click();
+        return;
+      }
+    }
+  }, 100);
 }
 
 window.onkeydown = (event: KeyboardEvent) => {

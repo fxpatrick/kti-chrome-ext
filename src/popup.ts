@@ -144,7 +144,9 @@ async function init() {
         const activeTab = instance.$store.state.style.style.activeTab;
         if (activeTab === "exchange-rate") {
           const exchangeSearchDiv = document.getElementById("exchange-search");
-          const exchangeSearchInput = document.getElementById("exchangeSearchInput");
+          const exchangeSearchInput = document.getElementById(
+            "exchangeSearchInput"
+          );
           if (exchangeSearchInput && exchangeSearchDiv) {
             exchangeSearchDiv.style.display = "block";
             exchangeSearchInput.focus();
@@ -179,7 +181,10 @@ async function init() {
 
       // Don't switch tabs if user is typing in an input field
       const target = e.target as HTMLElement;
-      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) {
+      if (
+        target &&
+        (target.tagName === "INPUT" || target.tagName === "TEXTAREA")
+      ) {
         return;
       }
 

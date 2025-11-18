@@ -62,10 +62,7 @@
     </div>
 
     <!-- Copy notification -->
-    <div
-      v-if="showCopyNotification"
-      class="copy-notification"
-    >
+    <div v-if="showCopyNotification" class="copy-notification">
       Copied to clipboard
     </div>
   </div>
@@ -85,11 +82,45 @@ export default Vue.extend({
       showCopyNotification: false,
       // Most commonly used currencies (in order of usage)
       currencyPriority: [
-        "USD", "EUR", "JPY", "GBP", "CNY", "AUD", "CAD", "CHF",
-        "HKD", "SGD", "SEK", "KRW", "NOK", "NZD", "INR", "MXN",
-        "TWD", "ZAR", "BRL", "DKK", "PLN", "THB", "ILS", "IDR",
-        "CZK", "AED", "TRY", "HUF", "CLP", "SAR", "PHP", "MYR",
-        "COP", "RUB", "RON", "PEN", "BHD", "BGN", "ARS"
+        "USD",
+        "EUR",
+        "JPY",
+        "GBP",
+        "CNY",
+        "AUD",
+        "CAD",
+        "CHF",
+        "HKD",
+        "SGD",
+        "SEK",
+        "KRW",
+        "NOK",
+        "NZD",
+        "INR",
+        "MXN",
+        "TWD",
+        "ZAR",
+        "BRL",
+        "DKK",
+        "PLN",
+        "THB",
+        "ILS",
+        "IDR",
+        "CZK",
+        "AED",
+        "TRY",
+        "HUF",
+        "CLP",
+        "SAR",
+        "PHP",
+        "MYR",
+        "COP",
+        "RUB",
+        "RON",
+        "PEN",
+        "BHD",
+        "BGN",
+        "ARS",
       ] as string[],
     };
   },

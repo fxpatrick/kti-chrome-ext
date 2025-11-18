@@ -5,11 +5,17 @@ export class Menu implements Module {
   async getModule() {
     await UserSettings.updateItems();
 
+    // Load company setup status
+    const stored = await chrome.storage.local.get([
+      "companyName",
+      "companySetupCompleted",
+    ]);
+
     const menuState = {
       state: {
         version: chrome.runtime.getManifest()?.version || "0.0.0",
         zoom: Number(UserSettings.items.zoom) || 100,
-        useAutofill: UserSettings.items.autofill === true,
+        useAutofill: UserSettings.items.autofill !== false,
         smartFilter: UserSettings.items.smartFilter === true,
         enableContextMenu: UserSettings.items.enableContextMenu === true,
         theme: UserSettings.items.theme || "normal",
@@ -24,6 +30,8 @@ export class Menu implements Module {
         passwordPolicyHint: await ManagedStorage.get<string>(
           "passwordPolicyHint"
         ),
+        companyName: stored.companyName || "",
+        companySetupCompleted: stored.companySetupCompleted || false,
       },
       mutations: {
         setZoom: (state: MenuState, zoom: number) => {
@@ -56,6 +64,12 @@ export class Menu implements Module {
           state.autolock = autolock;
           UserSettings.items.autolock = autolock;
           UserSettings.commitItems();
+        },
+        setCompanyName(state: MenuState, companyName: string) {
+          state.companyName = companyName;
+        },
+        setCompanySetupCompleted(state: MenuState, completed: boolean) {
+          state.companySetupCompleted = completed;
         },
       },
       namespaced: true,

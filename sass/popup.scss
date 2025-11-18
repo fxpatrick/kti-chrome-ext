@@ -1,29 +1,29 @@
 @font-face {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
-  src: url('roboto-400.woff2') format('woff2');
+  src: url("roboto-400.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
-  src: url('roboto-500.woff2') format('woff2');
+  src: url("roboto-500.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 600;
-  src: url('roboto-600.woff2') format('woff2');
+  src: url("roboto-600.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
-  src: url('roboto-700.woff2') format('woff2');
+  src: url("roboto-700.woff2") format("woff2");
 }
 
 @import "ui";
@@ -91,6 +91,13 @@ svg {
     color: themed("black-1");
     background: themed("white-1");
     border-bottom: themed("grey-2") 2px solid;
+  }
+
+  .header-icon {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 8px;
   }
 
   .icon {
@@ -1712,5 +1719,147 @@ svg {
   to {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
+  }
+}
+
+// Company Setup Overlay
+.company-setup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @include themify($themes) {
+    background: rgba(themed("black-1"), 0.8);
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(4px);
+}
+
+.company-setup-modal {
+  width: 340px;
+  border-radius: 12px;
+  @include themify($themes) {
+    background: themed("white-1");
+    box-shadow: 0 8px 32px rgba(themed("black-1"), 0.2);
+  }
+  padding: 0;
+  overflow: hidden;
+}
+
+.company-setup-header {
+  padding: 30px 30px 20px;
+  text-align: center;
+  @include themify($themes) {
+    border-bottom: 1px solid themed("grey-2");
+  }
+
+  .setup-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+    @include themify($themes) {
+      color: themed("black-1");
+    }
+  }
+}
+
+.company-setup-body {
+  padding: 30px;
+
+  p {
+    margin: 0 0 20px 0;
+    font-size: 14px;
+    @include themify($themes) {
+      color: themed("grey-1");
+    }
+    text-align: center;
+  }
+
+  .company-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 15px;
+    font-family: "Roboto", sans-serif;
+    border-radius: 8px;
+    @include themify($themes) {
+      background: themed("white-1");
+      border: 2px solid themed("grey-2");
+      color: themed("black-1");
+    }
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+
+    &:focus {
+      outline: none;
+      @include themify($themes) {
+        border-color: themed("blue-1");
+        box-shadow: 0 0 0 3px rgba(themed("blue-1"), 0.1);
+      }
+    }
+
+    &::placeholder {
+      @include themify($themes) {
+        color: themed("grey-3");
+      }
+    }
+  }
+
+  .error-message {
+    margin-top: 12px;
+    padding: 8px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+    @include themify($themes) {
+      background: rgba(239, 68, 68, 0.1);
+      color: #dc2626;
+    }
+    text-align: center;
+  }
+}
+
+.company-setup-footer {
+  padding: 0 30px 30px;
+
+  .submit-button {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: "Roboto", sans-serif;
+    border: none;
+    border-radius: 8px;
+    @include themify($themes) {
+      background: themed("blue-1");
+      color: themed("white-1");
+    }
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+      @include themify($themes) {
+        background: themed("blue-2");
+      }
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 }

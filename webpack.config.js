@@ -14,6 +14,8 @@ module.exports = {
     options: "./src/options.ts",
     qrdebug: "./src/qrdebug.ts",
     permissions: "./src/permissions.ts",
+    "clear-setup": "./src/clear-setup.ts",
+    "test-console": "./src/test-console.ts",
   },
   module: {
     noParse: /\.wasm$/,

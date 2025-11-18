@@ -1,6 +1,9 @@
 <template>
   <div class="header">
-    <span v-on:dblclick="popOut()">{{ i18n.extName }}</span>
+    <span v-on:dblclick="popOut()">
+      <img src="/images/icon.svg" class="header-icon" alt="" />
+      {{ i18n.extName }}
+    </span>
     <div v-show="!isPopup()">
       <div
         class="icon"
@@ -45,7 +48,7 @@
         class="icon"
         id="i-qr"
         v-bind:title="i18n.add_qr"
-        v-show="!style.isEditing"
+        v-show="!style.isEditing && style.activeTab !== 'exchange-rate'"
         v-on:click="beginCapture()"
       >
         <IconScan />
@@ -54,7 +57,7 @@
         class="icon"
         id="i-edit"
         v-bind:title="i18n.edit"
-        v-if="!style.isEditing"
+        v-if="!style.isEditing && style.activeTab !== 'exchange-rate'"
         v-on:click="editEntry()"
       >
         <IconPencil />
@@ -63,7 +66,7 @@
         class="icon"
         id="i-edit"
         v-bind:title="i18n.edit"
-        v-else
+        v-else-if="style.activeTab !== 'exchange-rate'"
         v-on:click="editEntry()"
       >
         <IconCheck />

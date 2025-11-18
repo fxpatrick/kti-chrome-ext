@@ -39,6 +39,8 @@ interface MenuState {
   theme: string;
   backupDisabled: boolean;
   storageArea: "sync" | "local";
+  companyName: string;
+  companySetupCompleted: boolean;
 }
 
 interface StyleState {
