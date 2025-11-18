@@ -7,21 +7,30 @@
       </div>
       <div class="company-setup-body">
         <p>Please enter your company information to get started</p>
-        <input
-          type="text"
-          v-model="companyName"
-          placeholder="PT Sejahtera Maju Bersama"
-          class="company-input"
-          @keyup.enter="submitCompanyName"
-          ref="companyInput"
-        />
-        <input
-          type="tel"
-          v-model="whatsappNumber"
-          placeholder="WhatsApp Number (e.g., +62812345678)"
-          class="company-input"
-          @keyup.enter="submitCompanyName"
-        />
+
+        <div class="form-group">
+          <label class="form-label">Company Name</label>
+          <input
+            type="text"
+            v-model="companyName"
+            placeholder="e.g., PT Sejahtera Maju Bersama"
+            class="company-input"
+            @keyup.enter="submitCompanyName"
+            ref="companyInput"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">WhatsApp Number</label>
+          <input
+            type="tel"
+            v-model="whatsappNumber"
+            placeholder="e.g., +62812345678"
+            class="company-input"
+            @keyup.enter="submitCompanyName"
+          />
+        </div>
+
         <div v-if="errorMessage" class="error-message">
           {{ errorMessage }}
         </div>
