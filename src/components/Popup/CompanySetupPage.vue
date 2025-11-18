@@ -13,7 +13,7 @@
           <input
             type="text"
             v-model="companyName"
-            placeholder="e.g., PT Sejahtera Maju Bersama"
+            placeholder="PT Sejahtera Bersama"
             class="company-input"
             @keyup.enter="submitCompanyName"
             ref="companyInput"
@@ -25,7 +25,7 @@
           <input
             type="tel"
             v-model="whatsappNumber"
-            placeholder="e.g., +62812345678"
+            placeholder="08170392821"
             class="company-input"
             @keyup.enter="submitCompanyName"
           />
